@@ -2,15 +2,31 @@ set nocompatible
 set number
 set ruler
 set hidden
+set history=1000
+set undolevels=1000
+
+set wildignore=*.swp,*.bak,*.pyc,*.class
+
+set visualbell "don't beep
+set noerrorbells "don't beep
+
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
 
 syntax on
 
 if has("win32")
   set directory=$TEMP
   set backupdir=$TEMP
-  set list listchars=tab:\»\ ,trail:·
+  set list listchars=tab:\ \ ,trail:·
 elseif has("mac")
-  set list listchars=tab:\â‡¥\ ,trail:Â·
+  set list listchars=tab:\ \ ,trail:·
 endif
 
 " Whitespace stuff
@@ -27,6 +43,12 @@ endif
 
 set expandtab
 
+" folding settings
+
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
 
 " Searching
 set hlsearch
@@ -42,20 +64,48 @@ set wildignore+=*.o,*.obj,.git,*.rbc
 set statusline=%<\ %n:%f\ %m%r%y\ [%{&ff}]%=%-35.(%l:%c\ %P(%L)\ \[0x%B]%)
 set laststatus=2
 
+" gives the $ symbol at the end of text substitute
+set cpoptions+=$
+
 " Leaderkey
 let mapleader=","
+let g:user_zen_leader_key = '<c-z>'
+
+" zencoding indentation size
+let g:user_zen_settings = {
+\ 'indentation' : '  '
+\}
+
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+"system clipboard access:
+map <Leader>y "*y
+map <Leader>p "*p
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
 map <Leader>n :NERDTreeToggle<CR>
+let NERDTreeChDirMode=2
+
+"Auto change the directory to the current file I am working on:
+"use nerdtree's auto change instead.
+"autocmd BufEnter * lcd %:p:h
 
 " Command-T configuration
 let g:CommandTMaxHeight=20
 
 
 " CTags
-map <Leader>t :TlistToggle<CR>
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <Leader><Leader>t :TlistToggle<CR>
+map <Leader><Leader>rt :!ctags --extra=+f -R *<CR><CR>
+
+map <C-tab> :bn<CR>
+map <C-S-tab> :bp<CR>
+map! <C-tab> <C-O>:bn<CR>
+map! <C-S-tab> <C-O>:bp<CR>
 
 " Remember last location in file
 if has("autocmd")
@@ -126,3 +176,16 @@ endif
 "Directories for swp files
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
+
+filetype off
+filetype indent plugin on
+
+fun! Trim()
+  try
+    execute "%s/\\s\\+$//g"
+    execute "%s/\\t/  /g"
+  catch
+  endtry
+endfun
+
+command Trim :call Trim()

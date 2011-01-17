@@ -1,9 +1,12 @@
-
-set list listchars=tab:\»\ ,trail:·
 if has("win32")
-    set guifont=consolas:h11
+  set directory=$TEMP
+  set backupdir=$TEMP
+endif
+
+if has("win32")
+    set guifont=monaco:h11
 elseif has("mac")
-    set guifont=monaco:h14
+    set guifont=menlo:h14
 endif
 
 if has("gui_macvim")
@@ -26,17 +29,18 @@ if has("gui_macvim")
 endif
 
 " Start without the toolbar
+set guioptions=aAce
 set guioptions-=Tm
 set guioptions+=r
 
-set columns=150
-set lines = 48
+set columns=120
+set lines=36
 
 map <Leader>y "*y
 map <Leader>p "*p
 
 " Default gui color scheme
-color jellybeans+
+color jellybeans
 
 " ConqueTerm wrapper
 function StartTerm()
