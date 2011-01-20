@@ -27,6 +27,9 @@ if has("win32")
   set list listchars=tab:\ \ ,trail:·
 elseif has("mac")
   set list listchars=tab:\ \ ,trail:·
+else
+  set directory=~/.vim_temp
+  set backupdir=~/.vim_temp
 endif
 
 " Whitespace stuff
