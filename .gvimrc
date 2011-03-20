@@ -1,12 +1,18 @@
 if has("win32")
   set directory=$TEMP
   set backupdir=$TEMP
+elseif has("mac")
+else
+  set directory=~/.vim_temp
+  set backupdir=~/.vim_temp
 endif
 
 if has("win32")
     set guifont=monaco:h11
 elseif has("mac")
     set guifont=menlo\ bold:h14
+else
+    set guifont=Monospace\ bold\ 11
 endif
 
 if has("gui_macvim")
