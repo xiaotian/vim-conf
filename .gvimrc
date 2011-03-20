@@ -10,7 +10,7 @@ endif
 if has("win32")
     set guifont=monaco:h11
 elseif has("mac")
-    set guifont=menlo:h14
+    set guifont=menlo\ bold:h14
 else
     set guifont=Monospace\ bold\ 11
 endif
