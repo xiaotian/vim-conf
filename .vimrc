@@ -10,6 +10,8 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set visualbell "don't beep
 set noerrorbells "don't beep
 
+set tags=./tags;
+
 "noremap  <Up> ""
 "noremap! <Up> <Esc>
 "noremap  <Down> ""
