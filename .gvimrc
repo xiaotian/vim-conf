@@ -10,7 +10,7 @@ endif
 if has("win32")
     set guifont=monaco:h11
 elseif has("mac")
-    set guifont=menlo:h14
+    set guifont=menlo\ bold:h14
 else
     set guifont=Monospace\ bold\ 11
 endif
@@ -33,6 +33,14 @@ if has("gui_macvim")
   " Command-/ to toggle comments
   map <D-/> <plug>NERDCommenterToggle<CR>
 endif
+
+set tags=~/projects/tags/rails3.tags
+set tags+=~/projects/tags/aspen.tags
+
+let Tlist_Show_One_File = 1
+"let Tlist_Use_Right_Window = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Enable_Fold_Column = 0
 
 " Start without the toolbar
 set guioptions=aAce
